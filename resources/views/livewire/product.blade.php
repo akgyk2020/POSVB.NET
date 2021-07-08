@@ -4,8 +4,15 @@
     <div class="col-md-8">
        <div class="card">
            <div class="card-body">
-               <h2 class="font-weight-bold mb-1">
-Product List </h2> 
+           
+           <div class="row row mb-2">
+                    <div class="col-md-6"><h2 class="font-weight-bold">Master Product</h2> </div>
+                    <div class="col-md-6">
+                    <div class="input-group mb-6">
+                    <div class="input-group-prepend">
+                        <span  class="input-group-text" id="basic-addon3">Searching</span>
+                        <input wire:model="search" type="text" placeholder="Typing your item here" type="text" class="form-control"></div></div></div>
+                </div>
                <table class="table table-bordered table-hovered table-striped">
                         <thead>
                             <tr>
@@ -30,14 +37,16 @@ Product List </h2>
                                 <td><img src="{{asset('storage/images/'.$product->image)}}" alt="Product Image" class="img-fluid"></td>
                                 <td>{{$product->description}}<br> Tag: {{$product->tag_id}}<br>Supp: {{$product->supp_id}}</td>
                                 <td>{{$product->qty}}</td>
-                                <td>Rp.{{$product->price}}</td>
-                                <td>disc1 Rp.{{$product->discount_price}}<br>disc2 Rp.{{$product->price_1}}<br>disc3 Rp.{{$product->price_2}}<br>disc4 Rp.{{$product->price_3}}</td>
+                                <td>Rp.{{ number_format($product->price,2,',','.')}} </td>
+                                <td>disc1 Rp.{{ number_format($product->discount_price,0,',','.')}}<br>disc2 Rp.{{ number_format($product->discount_price_1,0,',','.')}}<br>disc3 Rp.{{ number_format($product->discount_price_2,0,',','.')}}<br>disc4 Rp.{{ number_format($product->discount_price_3,0,',','.')}}</td>
                                 <td><button type="edit" class="btn btn-success btn-block">Edit</button><button type="Delete" class="btn btn-danger btn-block">Delete</button> </td>
 
                             </tr>
                             @endforeach
+                            
                         </tbody>
                </table>
+               <div style="display:flex;justify-content:center;">{{$products->links()}}</div>
            </div>
        </div>
     </div>

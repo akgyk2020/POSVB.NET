@@ -5,14 +5,22 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\Product as ProductModel;
 use Illuminate\Support\Facades\Storage;
+use Livewire\WithPagination;
 class Product extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
     use WithFileUploads;
     public $plu,$tag_id,$name,$image,$description,$qty,$price,$discount_price,$price_1,$price_2,$price_3,$user_id,$supp_id;
     //'plu','tag_id','name','image','description','qty','price','discount_price','price_1','price_2','price_3','user_id','supp_id'
+    public $search;
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
     public function render()
     {
-        $products= ProductModel::orderBy('created_at','DESC')->get();
+        $products= ProductModel::where('name','like','%'.$this->search.'%')->orderBy('created_at','DESC')->paginate(4);
         return view('livewire.product',[
             'products'=> $products
         ]);
