@@ -31,8 +31,8 @@
     <div class="card">
            <div class="card-body ">
                <h2 class="font-weight-bold mb-1 center">Cart List </h2> 
-                 <table class="table table-sm table-bordered table-striped table-hovered">
-                 <thead>
+                 <table class="table table-sm table-bordered table-hovered">
+                 <thead class="bg-secondary text-white">
                     <tr>
                         <th>No</th>
                         <th>Item</th>
@@ -44,8 +44,8 @@
                  @forelse($cart as $index=>$cart)
                      <tr class="">
                         <td>{{$index + 1}}</td>
-                        <td>{{$cart['name']}}</td>
-                        <td>{{$cart['qty']}}</td>
+                        <td><a href="#" class="font-weight-bold text-dark">{{$cart['name']}}</a></td>
+                        <td>{{$cart['qty']}} <a href="#" wire:click="increaseItem('{{$cart['rowId']}}')" class="font-weight-bold text-dark" style="font-size:15px;">+ </a> <a href="#" class="font-weight-bold text-dark">- </a></td>
                         <td>{{$cart['price']}}</td>
                      </tr>   
                  @empty

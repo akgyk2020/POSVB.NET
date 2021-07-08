@@ -99,4 +99,21 @@ class Cart extends Component
     public function disableTax(){
         $this->tax="0%";
     }
+
+    public function increaseItem($id){
+        $product=ProductModel::find($id);
+        $cart=\Cart::session(Auth()->id())->getContent();
+        $checkItem=$cart->whereIn('id',$id);
+        if($product->qty=$cekItem[$id]->quantity){
+            session()->flash('error','Qty MInus');
+        }else{
+            \Cart::session(Auth()->id())->update($id,[
+                'quantity'=>[
+                    'relative'=>true,
+                    'value' =>1
+                ]
+                ]);
+       
+        }
+    }
 }
