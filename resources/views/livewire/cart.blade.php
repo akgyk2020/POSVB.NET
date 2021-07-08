@@ -30,7 +30,9 @@
                     </div>
                </div>
                @empty
-                <h7>Product not Found</h7>
+               <div class="col-sm-12 mt-5">
+                   <h7 class="text-center font-weight-bold text-primary">Product not Found</h7>
+               </div>
                @endforelse
                </div>
                <div style="display:flex;justify-content:center;">{{$products->links()}}</div>
