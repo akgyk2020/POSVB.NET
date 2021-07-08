@@ -37,6 +37,7 @@
                         <th>No</th>
                         <th>Item</th>
                         <th>Qty</th>
+                        <th>action</th>
                         <th>Price</th>
                     </tr>
                  </thead>
@@ -45,7 +46,12 @@
                      <tr class="">
                         <td>{{$index + 1}}</td>
                         <td><a href="#" class="font-weight-bold text-dark">{{$cart['name']}}</a></td>
-                        <td>{{$cart['qty']}} <a href="#" wire:click="increaseItem('{{$cart['rowId']}}')" class="font-weight-bold text-dark" style="font-size:15px;">+ </a> <a href="#" class="font-weight-bold text-dark">- </a></td>
+                        <td>{{$cart['qty']}} <td>
+                        
+                        <a href="#" wire:click="increaseItem('{{$cart['rowId']}}')" class="font-weight-bold text-dark" style="font-size:15px;">+ </a> 
+                        <a href="#" wire:click="decreaseItem('{{$cart['rowId']}}')" class="font-weight-bold text-dark" style="font-size:15px;">- </a>
+                        <a href="#" wire:click="removeItem('{{$cart['rowId']}}')" class="font-weight-bold text-dark" style="font-size:15px;">x </a>
+                        
                         <td>{{$cart['price']}}</td>
                      </tr>   
                  @empty
@@ -60,9 +66,9 @@
             <div class="card">
                 <div class="card-body">
                    <div> <h7 class="font-weight-bold">Cart Summary</h7></div>
-                   <div> <h7 class="font-weight-bold">Sub Total:{{$summary['sub_total']}}</h7></div>
-                   <div> <h7 class="font-weight-bold">Tax:{{$summary['pajak']}}</h7></div>
-                   <div> <h7 class="font-weight-bold">Total:{{$summary['total']}}</h7></div>
+                   <div> <h7 class="font-weight-bold">Sub Total: Rp. {{$summary['sub_total']}}</h7></div>
+                   <div> <h7 class="font-weight-bold">Tax: Rp. {{$summary['pajak']}}</h7></div>
+                   <div> <h7 class="font-weight-bold">Total: Rp. {{$summary['total']}}</h7></div>
                 <div>
                    <button wire:click="enableTax"   class="btn btn-primary btn-block">add tax</button>
                    <button wire:click="disableTax"  class="btn btn-danger btn-block">Remove tax</button>
