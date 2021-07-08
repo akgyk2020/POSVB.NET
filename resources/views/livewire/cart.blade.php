@@ -13,7 +13,7 @@
                         <input wire:model="search" type="text" placeholder="Typing your item here" class="form-control"></div></div></div>
                 </div>
                <div class="row">
-               @foreach($products as $product)
+               @forelse($products as $product)
                <div class="col-md-3 mb-3">
                     <div class="card">
                         <div class="card-body">
@@ -29,7 +29,9 @@
 
                     </div>
                </div>
-               @endforeach
+               @empty
+                <h7>Product not Found</h7>
+               @endforelse
                </div>
                <div style="display:flex;justify-content:center;">{{$products->links()}}</div>
            </div>

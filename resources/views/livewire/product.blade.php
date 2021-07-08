@@ -29,7 +29,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($products as $index => $product)
+                            @forelse($products as $index => $product)
                             <tr>
                                 <td>{{$index + 1}}</td> 
                                 <td>{{$product->plu}}</td>   
@@ -42,7 +42,11 @@
                                 <td><button type="edit" class="btn btn-success btn-block">Edit</button><button type="Delete" class="btn btn-danger btn-block">Delete</button> </td>
 
                             </tr>
-                            @endforeach
+                            
+                            @empty
+                                <h7>Product not Found</h7>
+
+                            @endforelse
                             
                         </tbody>
                </table>
