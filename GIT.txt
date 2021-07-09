@@ -1,0 +1,10 @@
+git init
+
+git clone <remote-url>
+cd <repository>
+
+
+git clone git@github.com:akgyk2020/POS_LARA.git
+
+cd <repository>
+
