@@ -3,29 +3,26 @@
 <div class="row">
     <div class="col-md-8">
        <div class="card">
-           <div class="card-body">
-           <div class="row mb-2">
-                    <div class="col-md-6"><h2 class="font-weight-bold">List Product</h2> </div>
-                    <div class="col-md-6">
-                    <div class="input-group mb-6">
-                    <div class="input-group-prepend">
-                        <span  class="input-group-text" id="basic-addon3">Searching</span>
-                        <input wire:model="search" type="text" placeholder="Typing your item here" class="form-control"></div></div></div>
+                <div class="card-header">
+                    <div class="row mb-2">
+                    <div class="col-md-6"><h4 class="font-weight-bold">List Product</h4> </div>
+                    <div class="col-md-6"><input wire:model="search" type="text" placeholder="Typing your item here" class="form-control">                 </div> 
+                    </div>
                 </div>
+           <div class="card-body">
+                
                <div class="row">
                @forelse($products as $product)
                <div class="col-md-3 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <img src="{{ asset('storage/images/'.$product->image)}}" alt="Product Image" class="rounded float-center" height="100"  width="150px">
-                        </div>
-                        <div class="card-footer">
-                        <div class="text-center"><h7>{{$product->plu}}</h7></div>
-                        <div class="text-center font-weight-bold"><h7>{{$product->name}}</h7></div>
-                        <div class="text-center"><h7>Stock :{{$product->qty}}</h7></div>
-                        <div class="text-center"><h7>Prices : Rp.{{ number_format($product->price,2,',','.')}} </h7></div>
-                            <button wire:click="addItem({{$product->id}})" class="btn btn-success btn-sm btn-block">add to cart</button>
-                        </div>
+                    <div class="card" wire:click="addItem({{$product->id}})" style="cursor:pointer">
+                        
+                        <img src="{{ asset('storage/images/'.$product->image)}}" alt="Product" style="object-fit:contain; width:100%; height:170px">
+                        <button wire:click="addItem({{$product->id}})" class="btn btn-success btn-sm" style="position:absolute;top:0;right:0;padding:10px 10px"><i class="fas fa-shopping-bag fa-lg"></i></button>
+                         
+                        <h6 class="text-center font-weight-bold mt-2">{{$product->plu}} . {{$product->name}}</h6>
+                        <h8 class="text-center">Stock :{{$product->qty}}</h8>
+                        <h8 class="text-center">Rp.{{ number_format($product->price,2,',','.')}} </h8>
+                       
 
                     </div>
                </div>
@@ -57,13 +54,13 @@
                  <tbody>
                  @forelse($cart as $index=>$cart)
                      <tr class="font-weight-bold text-dark">
-                        <td>{{$index + 1}}</td>
-                        <td><a href="#" class="font-weight-bold text-dark">{{$cart['name']}}</a></td>
-                        <td>{{$cart['qty']}} <td>
+                        <td class="text-center">{{$index + 1}}</td>
+                        <td><span href="#" class="font-weight-bold text-dark;cursor:pointer">{{$cart['name']}}</span></td>
+                        <td class="text-center">{{$cart['qty']}} <td>
                         
-                        <a href="#" wire:click="increaseItem('{{$cart['rowId']}}')" class="font-weight-bold text-dark" style="font-size:15px;">+ </a> 
-                        <a href="#" wire:click="decreaseItem('{{$cart['rowId']}}')" class="font-weight-bold text-dark" style="font-size:15px;">- </a>
-                        <a href="#" wire:click="removeItem('{{$cart['rowId']}}')" class="font-weight-bold text-dark" style="font-size:15px;">x </a>
+                         <i class="fas fa-plus"  wire:click="increaseItem('{{$cart['rowId']}}')"  style="font-size:13px;cursor:pointer;color:green"></i>
+                         <i class="fas fa-minus" wire:click="decreaseItem('{{$cart['rowId']}}')"  style="font-size:13px;cursor:pointer;color:pink"></i> 
+                         <i class="fas fa-trash" wire:click="removeItem('{{$cart['rowId']}}')"  style="font-size:13px;cursor:pointer;color:red"></i>
                         
                         <td>Rp.{{ number_format($cart['price'],2,',','.')}}</td>
                      </tr>   
