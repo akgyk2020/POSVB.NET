@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-md-8">
        <div class="card">
-                <div class="card-header">
+                <div class="card-header bg-white">
                     <div class="row mb-2">
                     <div class="col-md-6"><h4 class="font-weight-bold">List Product</h4> </div>
                     <div class="col-md-6"><input wire:model="search" type="text" placeholder="Typing your item here" class="form-control">                 </div> 
@@ -39,16 +39,28 @@
     </div>
     <div class="col-md-4">
     <div class="card">
+         <div class="card-header bg-dark text-white">
+
+         <h4 class="font-weight-bold mb-1 center">Cart List </h4> 
+            
+                
+         
+              
+         </div>
            <div class="card-body ">
-               <h2 class="font-weight-bold mb-1 center">Cart List </h2> 
-                 <table class="table table-sm table-bordered table-hovered">
-                 <thead class="bg-secondary text-white">
+                @if(session()->has('error'))
+                    <p class="text-danger font-weight-bold">
+                        {{session('error')}}
+                    </p>  
+                @endif
+               <table class="table table-sm table-bordered table-hovered">
+                 <thead>
                     <tr>
-                        <th>No</th>
-                        <th>Item</th>
-                        <th>Qty</th>
-                        <th>action</th>
-                        <th>Price</th>
+                        <th class="font-weight-bold text-dark">No</th>
+                        <th class="font-weight-bold text-dark">Item</th>
+                        <th class="font-weight-bold text-dark">Qty</th>
+                        <th class="font-weight-bold text-dark">action</th>
+                        <th class="font-weight-bold text-dark">Price</th>
                     </tr>
                  </thead>
                  <tbody>
@@ -57,9 +69,9 @@
                         <td class="text-center">{{$index + 1}}</td>
                         <td><span href="#" class="font-weight-bold text-dark;cursor:pointer">{{$cart['name']}}</span></td>
                         <td class="text-center">{{$cart['qty']}} <td>
-                        
-                         <i class="fas fa-plus"  wire:click="increaseItem('{{$cart['rowId']}}')"  style="font-size:13px;cursor:pointer;color:green"></i>
-                         <i class="fas fa-minus" wire:click="decreaseItem('{{$cart['rowId']}}')"  style="font-size:13px;cursor:pointer;color:pink"></i> 
+                            <button class="btn btn-primary btn-sm" style="padding:7px 10px" wire:click="increaseItem('{{$cart['rowId']}}')">+</button>
+                            <button class="btn btn-primary btn-sm" style="padding:7px 10px" wire:click="decreaseItem('{{$cart['rowId']}}')">-</button>
+                         
                          <i class="fas fa-trash" wire:click="removeItem('{{$cart['rowId']}}')"  style="font-size:13px;cursor:pointer;color:red"></i>
                         
                         <td>Rp.{{ number_format($cart['price'],2,',','.')}}</td>
