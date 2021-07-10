@@ -14,6 +14,24 @@
                                     </div>
 
                                 <div class="form-group">                                    
+                                    <label for="level">Level</label>
+                                    <input wire:model="form.level" type="number" class="form-control" placeholder="Input your Level">
+                                    @error('form.level') <span class="text-danger">{{$message}}</span>@enderror
+                                </div>
+
+                                <div class="form-group">                                    
+                                    <label for="dept">Dept</label>
+                                    <input wire:model="form.dept" type="number" class="form-control" placeholder="Input your Dept">
+                                    @error('form.dept') <span class="text-danger">{{$message}}</span>@enderror
+                                </div>
+
+                                <div class="form-group">                                    
+                                    <label for="active">Active</label>
+                                    <input wire:model="form.active" type="number" class="form-control" placeholder="Input your Active">
+                                    @error('form.active') <span class="text-danger">{{$message}}</span>@enderror
+                                </div>
+
+                                <div class="form-group">                                    
                                     <label for="email">Email</label>
                                     <input wire:model="form.email" type="text" class="form-control" placeholder="Input your Email">
                                     @error('form.email') <span class="text-danger">{{$message}}</span>@enderror

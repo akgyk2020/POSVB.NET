@@ -6,6 +6,7 @@
                 <div class="card">
                     <div class="card-body sm-8">
                             <h1 class="text-center">  Login</h1>
+                            @if(session()->has('error'))<span class="text-danger">{{session('error')}}</span>@endif
                             <form wire:submit.prevent="submit">
                                 <div class="form-group">                                    
                                     <label for="email">Email</label>
