@@ -14,7 +14,7 @@
                <div class="row">
                @forelse($products as $product)
                <div class="col-md-3 mb-3">
-                    <div class="card" wire:click="addItem({{$product->id}})" style="cursor:pointer">
+                    <div class="card">
                         
                         <img src="{{ asset('storage/images/'.$product->image)}}" alt="Product" style="object-fit:contain; width:100%; height:170px">
                         <button wire:click="addItem({{$product->id}})" class="btn btn-success btn-sm" style="position:absolute;top:0;right:0;padding:10px 10px"><i class="fas fa-shopping-bag fa-lg"></i></button>
@@ -41,7 +41,7 @@
     <div class="card">
          <div class="card-header bg-dark text-white">
 
-         <h4 class="font-weight-bold mb-1 center">Cart List </h4> 
+         <h4 class="font-weight-bold mb-1 center">List Cart  </h4> 
             
                 
          
@@ -67,12 +67,12 @@
                  @forelse($cart as $index=>$cart)
                      <tr class="font-weight-bold text-dark">
                         <td class="text-center">{{$index + 1}}</td>
-                        <td><span href="#" class="font-weight-bold text-dark;cursor:pointer">{{$cart['name']}}</span></td>
-                        <td class="text-center">{{$cart['qty']}} <td>
+                        <td><span href="#" class="font-weight-bold text-dark;cursor:pointer">{{$cart['name']}}<br>Rp.{{ number_format($cart['pricesingle'],2,',','.')}}</span></td>
+                        <td class="text-center">{{$cart['qty']}}<br><i class="fas fa-trash" wire:click="removeItem('{{$cart['rowId']}}')"  style="font-size:13px;cursor:pointer;color:red"></i> <td>
                             <button class="btn btn-primary btn-sm" style="padding:7px 10px" wire:click="increaseItem('{{$cart['rowId']}}')">+</button>
-                            <button class="btn btn-primary btn-sm" style="padding:7px 10px" wire:click="decreaseItem('{{$cart['rowId']}}')">-</button>
+                            <button class="btn btn-info btn-sm" style="padding:7px 10px" wire:click="decreaseItem('{{$cart['rowId']}}')">-</button>
                          
-                         <i class="fas fa-trash" wire:click="removeItem('{{$cart['rowId']}}')"  style="font-size:13px;cursor:pointer;color:red"></i>
+                         
                         
                         <td>Rp.{{ number_format($cart['price'],2,',','.')}}</td>
                      </tr>   
@@ -92,12 +92,18 @@
                    <div> <h7 class="font-weight-bold">Sub Total: Rp.{{ number_format($summary['sub_total'],2,',','.')}}  </h7></div>
                    <div> <h7 class="font-weight-bold">Tax: Rp.{{ number_format($summary['pajak'],2,',','.')}}</h7></div>
                    <div> <h7 class="font-weight-bold">Total: Rp.{{ number_format($summary['total'],2,',','.')}}</h7></div>
-                <div>
-                   <button wire:click="enableTax"   class="btn btn-primary btn-block">add tax</button>
-                   <button wire:click="disableTax"  class="btn btn-danger btn-block">Remove tax</button>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <button wire:click="enableTax"   class="btn btn-primary btn-sm" style="padding:7px 10px">add tax</button>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <button wire:click="disableTax"  class="btn btn-danger btn-sm" style="padding:7px 10px">Remove tax</button>
+                    </div>
+                   
                 </div>
                 <div class="mt-4">
-                   <button   class="btn btn-success active btn-block">Save Transaction</button>
+                   <button   class="btn btn-success  btn-block">Save Transaction</button>
                 </div>
                 </div>
             </div>

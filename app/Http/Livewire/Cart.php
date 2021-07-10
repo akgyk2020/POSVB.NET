@@ -73,15 +73,22 @@ class Cart extends Component
     public function addItem($id){
         $rowId="Cart".$id;
         $cart=\Cart::session(Auth()->id())->getContent();
-        $cekItem= $cart->whereIn('id',$rowId);
+        $cekItemId= $cart->whereIn('id',$rowId);
 
-        if($cekItem->isNotEmpty()){
-            \Cart::session(Auth()->id())->update($rowId,[
-            'quantity'=>[
-                'relative'=>true,
-                'value'=>1
-                ]
-            ]);
+        $idProduct=substr($rowId,4,5);
+        $product=ProductModel::find($idProduct);
+
+        if($cekItemId->isNotEmpty()){
+            if($product->qty == $cekItemId[$rowId]->quantity){
+                session()->flash('error','Stock not Available More');
+            }else{
+                \Cart::session(Auth()->id())->update($rowId,[
+                'quantity'=>[
+                    'relative'=>true,
+                    'value'=>1
+                    ]
+                ]);
+            }
         }else{
             $product =ProductModel::findOrFail($id);
             \Cart::session(Auth()->id())->add([
@@ -107,7 +114,7 @@ class Cart extends Component
         $this->tax="0%";
     }
 
-    public function increaseItem($rowId){
+   // public function increaseItem($rowId){
         //$rowId="Cart".$id;
        // $product=ProductModel::find($id);
        // $cart=\Cart::session(Auth()->id())->getContent();
@@ -115,15 +122,40 @@ class Cart extends Component
         //if($product->qty=$checkItem[$id]->quantity){
        //     session()->flash('error','Qty MInus');
        // }else{
+           // \Cart::session(Auth()->id())->update($rowId,[
+          //      'quantity'=>[
+           //         'relative'=>true,
+           //         'value' =>1
+          //      ]
+         //   ]);
+       
+        
+    //}
+
+    public function increaseItem($rowId){
+        //$rowId="Cart".$id;
+        $idProduct=substr($rowId,4,5);
+        $product=ProductModel::find($idProduct);
+
+        $cart=\Cart::session(Auth()->id())->getContent();
+
+        $checkItem=$cart->whereIn('id',$rowId);
+
+        if($product->qty == $checkItem[$rowId]->quantity){
+            session()->flash('error','Stock not Available More');
+        }else{
+
             \Cart::session(Auth()->id())->update($rowId,[
                 'quantity'=>[
                     'relative'=>true,
                     'value' =>1
                 ]
             ]);
-       
+        }
         
     }
+
+
 
     public function decreaseItem($rowId){
             \Cart::session(Auth()->id())->update($rowId,[
