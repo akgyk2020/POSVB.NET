@@ -11,7 +11,7 @@
  Target Server Version : 100407
  File Encoding         : 65001
 
- Date: 08/07/2021 16:31:12
+ Date: 11/07/2021 00:16:22
 */
 
 SET NAMES utf8mb4;
@@ -90,7 +90,7 @@ CREATE TABLE `product`  (
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of product
@@ -104,6 +104,7 @@ INSERT INTO `product` VALUES (6, '106', 'B', 'LCD', '3e5007deda83429744b450121bf
 INSERT INTO `product` VALUES (7, '107', 'C', 'Digital scanner', '3e5007deda83429744b450121bf5da65', 'Digital scanner', 2, 7500, 375, 750, 1500, 2250, 1, 1, '2021-07-04 10:46:05', '2021-07-04 10:46:05');
 INSERT INTO `product` VALUES (8, '108', 'D', 'DVD Blank', '3e5007deda83429744b450121bf5da65', 'DVD Blank', 10, 23000, 1150, 2300, 4600, 6900, 1, 1, '2021-07-04 14:01:04', '2021-07-04 14:01:04');
 INSERT INTO `product` VALUES (9, '3', '4', '5', '3e5007deda83429744b450121bf5da65', '6', 7, 8, 9, 10, 11, 12, 1, 2, '2021-07-07 07:05:25', '2021-07-07 07:05:25');
+INSERT INTO `product` VALUES (10, '1', '1', '1', '8c6be3c957e83b58d51b4d583bb11fe0', '1', 1, 1, 1, 1, 1, 1, 1, 1, '2021-07-09 23:24:30', '2021-07-09 23:24:30');
 
 -- ----------------------------
 -- Table structure for product_xx
@@ -149,6 +150,9 @@ CREATE TABLE `users`  (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `level` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `dept` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `active` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `email_verified_at` timestamp(0) NULL DEFAULT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
@@ -156,12 +160,13 @@ CREATE TABLE `users`  (
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `users_email_unique`(`email`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES (1, 'haris rifai', 'akgbs@gmail.com', NULL, '$2y$10$djhV6lZtuqosfji7dX3QweqGy6ys0dfGsxhnz37ZjW4MLL5NrvpwO', NULL, '2021-07-04 04:25:59', '2021-07-04 04:25:59');
-INSERT INTO `users` VALUES (2, 'Moh Haris Rifai ST', 'garmen.yk@gmail.com', NULL, '$2y$10$55zLk9nT.JC7ImFZqM6KpObI789CmUlY65gjbNzB14ExlbovvqPKe', NULL, '2021-07-07 06:01:50', '2021-07-07 06:01:50');
+INSERT INTO `users` VALUES (1, 'haris rifai', 'akgbs@gmail.com', '1', '2', '1', NULL, '$2y$10$djhV6lZtuqosfji7dX3QweqGy6ys0dfGsxhnz37ZjW4MLL5NrvpwO', NULL, '2021-07-04 04:25:59', '2021-07-04 04:25:59');
+INSERT INTO `users` VALUES (2, 'Moh Haris Rifai ST', 'garmen.yk@gmail.com', '2', '2', '1', NULL, '$2y$10$55zLk9nT.JC7ImFZqM6KpObI789CmUlY65gjbNzB14ExlbovvqPKe', NULL, '2021-07-07 06:01:50', '2021-07-07 06:01:50');
+INSERT INTO `users` VALUES (3, 'd', 'd@gmail.com', NULL, NULL, NULL, NULL, '$2y$10$gXEx.v6v4lBADahVibviCew0gkeZtdtP2ehKB/bzr9vfHRkmh.an2', NULL, '2021-07-10 17:14:34', '2021-07-10 17:14:34');
 
 SET FOREIGN_KEY_CHECKS = 1;

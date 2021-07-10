@@ -29,13 +29,14 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
             <div class="container">
+            @auth  
             <a class="navbar-brand" href="{{ url('/home') }}">
             <img src="{{asset('/images/anggun.ico')}}" width="30" height="30" alt="Logo"></a>
-                               
+                            
                 <a class="navbar-brand" href="{{ url('/cart') }}">
                    Point of Sale
                 </a>
-   
+            @endauth
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -81,16 +82,8 @@
                                 <a class="dropdown-item" href="{{ url('/master') }}">-Sales</a>
                                 <a class="dropdown-item" href="{{ url('/master') }}">-Order</a>
                                 <a class="dropdown-item" href="{{ url('/master') }}">-Stock</a>
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                    
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
+                                 
+                                <livewire:auth.logout />
                                 </div>
                             </li>
                         @endguest
