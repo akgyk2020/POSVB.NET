@@ -77,7 +77,7 @@
                         <td>Rp.{{ number_format($cart['price'],2,',','.')}}</td>
                      </tr>   
                  @empty
-                    <td colspan="3" class="text-center">Empty Cart</td>
+                    <td colspan="34" class="text-center">Empty Cart</td>
 
                  @endforelse
                  </tbody>
@@ -102,11 +102,76 @@
                     </div>
                    
                 </div>
+                <div class="form-group mt-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Payment</span>
+                        
+                            <input type="number" class="form control" id="payment" placeholder="Input customer payment amount">
+                        </div>
+                    <input type="hidden" class="form control" id="total" value="{{$summary['total']}}" >
+                </div>
+
+                <div class="form-group mt-4">
+                    <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Payment</span>
+                    <h5 id="PaymentText">Rp. 0</h5>
+                    </div>
+                </div>
+
+                <div class="form-group mt-4">
+                    <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">Cash Back</span>
+                    <h5 id="kembalianText">Rp. 0</h5>
+                    </div>
+                </div>
+
                 <div class="mt-4">
-                   <button   class="btn btn-success  btn-block">Save Transaction</button>
+                   <button wire:ignore disabled  class="btn btn-success  btn-block" id="saveButton">Save Transaction</button>
                 </div>
                 </div>
             </div>
     </div>
 </div> 
 </div>
+
+@push('script-custom')
+    <script>
+      payment.oninput = () => {
+           const paymentAmount = document.getElementById("payment").value
+           const totalAmount = document.getElementById("total").value
+
+           const kembalian =  paymentAmount - totalAmount
+           document.getElementById("PaymentText").innerHTML =`Rp. ${rupiah(paymentAmount)},00`
+           document.getElementById("kembalianText").innerHTML =`Rp. ${rupiah(kembalian)},00`
+           
+           const saveButton = document.getElementById("saveButton")
+                if(kembalian < 0){
+                    saveButton.disabled = true
+                }else{
+                    saveButton.disabled = false
+                }
+           }
+           
+
+             
+      }
+
+      const rupiah = (angka) => {
+          const numberString = angka.toString()
+          const split=numberString.split(',')
+          const sisa =split[0].length % 3
+          let rupiah = split[0].substr(0, sisa) 
+          const ribuan = split[0].substr(sisa).match(/\d{1,3}/gi)
+
+          if (ribuan){
+              const separator = sisa ? '.':''
+              rupiah += separator + ribuan.join('.')
+
+          }
+          return split[1] != undefined ? rupiah + ',' + split[1]: rupiah
+      }
+      
+            
+    </script>
+
+@endpush
